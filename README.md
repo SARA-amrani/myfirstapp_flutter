@@ -133,7 +133,7 @@ Tu peux y créer une classe `Gear` pour représenter un équipement de façon pl
 
 ##  Aperçu de l’UI (schéma)
 
-```
+
 +--------------------------------------------------+
 |              AppBar - List of Gears              |
 +--------------------------------------------------+
@@ -147,7 +147,7 @@ Tu peux y créer une classe `Gear` pour représenter un équipement de façon pl
 +--------------------------------------------------+
 | Overview | Gears | Alerts | Predictions          |
 +--------------------------------------------------+
-```
+
 
 ---
 

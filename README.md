@@ -100,6 +100,16 @@ Tu peux y créer une classe `Gear` pour représenter un équipement de façon pl
 1. **Au démarrage**, `main.dart` affiche `GearListScreen`.
 2. `GearListScreen` affiche la liste actuelle de `GearItem`.
 
+####  Aperçu de l’UI (schéma)
+
+| **Gear**  | **État**    | **Message**         |
+|----------|-------------|---------------------|
+| Gear 1   | ✅ OK        | All Good            |
+| Gear 2   | ⚠️ Warning   | Fault Code 04       |
+| Gear 3   | ❌ Fault     | Critical            |
+| Gear 4   | -           | RUL 15d             |
+| Gear 5   | -           | Pu6L1               |
+
 ![alt text](captures/photo4.png)
 
 3. Lorsque l’utilisateur appuie sur "Add Gear", un formulaire s’ouvre (`AddGearScreen`).
@@ -128,26 +138,6 @@ Tu peux y créer une classe `Gear` pour représenter un équipement de façon pl
 |  Interface élégante        | Les widgets personnalisables permettent un rendu moderne avec peu de code.                |
 |  Multiplateforme           | Une seule base de code pour Android, iOS et même Web.                                     |
 |  Composants réutilisables  | Widgets comme `GearItem` permettent une architecture propre et modulaire.                 |
-
----
-
-##  Aperçu de l’UI (schéma)
-
-
-+--------------------------------------------------+
-|              AppBar - List of Gears              |
-+--------------------------------------------------+
-|  Gear 1        [OK]         All Good             |
-|  Gear 2     [Warning]    Fault Code 04           |
-|  Gear 3       [Fault]        Critical            |
-|  Gear 4                      RUL 15d             |
-|  Gear 5                      Pu6L1               |
-+--------------------------------------------------+
-|         [ + Add Gear ] (bouton formulaire)       |
-+--------------------------------------------------+
-| Overview | Gears | Alerts | Predictions          |
-+--------------------------------------------------+
-
 
 ---
 

@@ -1,69 +1,92 @@
 import 'package:flutter/material.dart';
+import 'package:myfirstapp_flutter/widgets/gear_item.dart'; // Importation du widget GearItem
 
 class AddGearScreen extends StatefulWidget {
-  final Function(Map<String, String>) onAddGear;
-
-  AddGearScreen({required this.onAddGear});
-
   @override
   _AddGearScreenState createState() => _AddGearScreenState();
 }
 
 class _AddGearScreenState extends State<AddGearScreen> {
   final _formKey = GlobalKey<FormState>();
-  String _title = '';
-  String _status = '';
-  String _note = '';
-
-  void _submitForm() {
-    if (_formKey.currentState!.validate()) {
-      _formKey.currentState!.save();
-
-      final newGear = {
-        'title': _title,
-        'status': _status,
-        'note': _note,
-      };
-
-      widget.onAddGear(newGear);
-      Navigator.pop(context);
-
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Gear added successfully')),
-      );
-    }
-  }
+  final _nameController = TextEditingController();
+  String _status = 'OK';
+  final _faultController = TextEditingController();
+  final _rulController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Add a New Gear'),
-      ),
+      appBar: AppBar(title: Text('Add New Gear')),
       body: Padding(
-        padding: EdgeInsets.all(16.0),
+        padding: EdgeInsets.all(16),
         child: Form(
           key: _formKey,
-          child: Column(
+          child: ListView(
             children: [
               TextFormField(
-                decoration: InputDecoration(labelText: 'Gear Title'),
-                validator: (value) => value == null || value.isEmpty ? 'Enter title' : null,
-                onSaved: (value) => _title = value!,
+                controller: _nameController,
+                decoration: InputDecoration(labelText: 'Name of Gear'),
+                validator: (value) => value!.isEmpty ? 'Enter name' : null,
               ),
-              TextFormField(
+              SizedBox(height: 10),
+              DropdownButtonFormField<String>(
+                value: _status,
+                items: ['OK', 'Warning', 'Fault']
+                    .map((status) => DropdownMenuItem(value: status, child: Text(status)))
+                    .toList(),
+                onChanged: (val) => setState(() => _status = val!),
                 decoration: InputDecoration(labelText: 'Status'),
-                onSaved: (value) => _status = value ?? '',
               ),
+              SizedBox(height: 10),
               TextFormField(
-                decoration: InputDecoration(labelText: 'Note'),
-                onSaved: (value) => _note = value ?? '',
+                controller: _faultController,
+                decoration: InputDecoration(labelText: 'Fault Code (optional)'),
+              ),
+              SizedBox(height: 10),
+              TextFormField(
+                controller: _rulController,
+                decoration: InputDecoration(labelText: 'Estimated RUL (optional)'),
+                keyboardType: TextInputType.number,
               ),
               SizedBox(height: 20),
               ElevatedButton(
-                onPressed: _submitForm,
-                child: Text('Add Gear'),
-              ),
+                onPressed: () {
+                  if (_formKey.currentState!.validate()) {
+                    final icon = _status == "OK"
+                        ? Icons.check_circle
+                        : _status == "Warning"
+                            ? Icons.warning_amber_rounded
+                            : Icons.error;
+                    final iconColor = _status == "OK"
+                        ? Colors.green
+                        : _status == "Warning"
+                            ? Colors.orange
+                            : Colors.red;
+
+                    String? note;
+                    if (_faultController.text.isNotEmpty) {
+                      note = _faultController.text;
+                    } else if (_rulController.text.isNotEmpty) {
+                      note = "RUL: ${_rulController.text}d";
+                    }
+
+                    final newGear = GearItem(
+                      title: _nameController.text,
+                      status: _status,
+                      icon: icon,
+                      iconColor: iconColor,
+                      note: note,
+                    );
+                    Navigator.pop(context, newGear);
+                  }
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.blueAccent,
+                  minimumSize: Size(double.infinity, 48),
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                ),
+                child: Text('Add', style: TextStyle(color: Colors.white, fontSize: 16)),
+              )
             ],
           ),
         ),

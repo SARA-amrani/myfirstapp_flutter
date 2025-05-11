@@ -152,3 +152,13 @@ Souhaites-tu que je te génère l’image de cette interface maintenant pour vis
 // 2. Définir les interfaces : ListGearsScreen et AddGearScreen
 // 3. Naviguer de la liste vers le formulaire d'ajout
 // 4. Afficher dynamiquement les Gears dans une liste
+
+
+Structure du projet
+main.dart : Ce fichier contient votre point d'entrée, et vous n'avez plus qu'à initialiser GearListScreen() comme dans le code que vous avez donné.
+
+gear_list_screen.dart : Ce fichier gère la liste des gears et leur ajout via un bouton.
+
+add_gear_screen.dart : Ce fichier gère l'écran où l'utilisateur peut ajouter un gear.
+
+gear_item.dart : Ce fichier contient le widget GearItem qui représente un gear sous forme de carte.

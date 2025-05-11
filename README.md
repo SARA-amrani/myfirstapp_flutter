@@ -137,11 +137,11 @@ Tu peux y créer une classe `Gear` pour représenter un équipement de façon pl
 +--------------------------------------------------+
 |              AppBar - List of Gears              |
 +--------------------------------------------------+
-|  Gear 1        [OK]         All Good           |
-|  Gear 2     [Warning]    Fault Code 04         |
-|  Gear 3       [Fault]        Critical          |
-|  Gear 4                      RUL 15d           |
-|  Gear 5                      Pu6L1             |
+|  Gear 1        [OK]         All Good             |
+|  Gear 2     [Warning]    Fault Code 04           |
+|  Gear 3       [Fault]        Critical            |
+|  Gear 4                      RUL 15d             |
+|  Gear 5                      Pu6L1               |
 +--------------------------------------------------+
 |         [ + Add Gear ] (bouton formulaire)       |
 +--------------------------------------------------+

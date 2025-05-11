@@ -1,164 +1,162 @@
-# myfirstapp_flutter
+# Gear Status App - Flutter
+Cette application Flutter permet de **gérer une liste d’équipements (Gears)**, chacun ayant un statut (OK, Warning, Fault), un code d’erreur ou une estimation de durée de vie (RUL - Remaining Useful Life). Elle offre une interface intuitive pour **afficher, ajouter et visualiser des équipements**.
+---
 
-A new Flutter project.
+## Plateforme de Maintenance 4.0 
+Ce projet présente une plateforme intelligente de maintenance prédictive conçue pour optimiser la gestion des équipements industriels en s'appuyant sur les technologies IoT, Intelligence Artificielle, et visualisation de données. Grâce à une architecture en 4 niveaux (collecte, stockage, analyse, visualisation), elle permet la détection précoce des défaillances, la réduction des coûts de maintenance et l'amélioration de la disponibilité des machines.
+---
 
-## Getting Started
+##  Fonctionnalités principales
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
-
-
-Très bonne question ! Voici une réponse détaillée pour les **boutons "Sort"** et **"Filter"** ainsi que l’**interface "Add Gear"** pour ton application de maintenance prédictive.
+*  Affichage d'une liste d'équipements avec leur statut visuel.
+*  Ajout dynamique d’un nouvel équipement via un formulaire.
+*  Affichage des informations additionnelles : code de panne (`Fault Code`) ou estimation de durée de vie (`RUL`).
+*  Rafraîchissement automatique de la liste après ajout.
+*  Interface utilisateur moderne avec navigation fluide.
 
 ---
 
-## 🔃 **Bouton `Sort`** (Trier)
+##  Structure du projet
 
-Permet de trier la liste des engrenages selon différents critères :
+![alt text](captures/photo1.png)
 
-### 🔽 Options de tri proposées :
 
-* **Par état** (OK → Warning → Fault)
-* **Par RUL** (Remaining Useful Life croissant ou décroissant)
-* **Par nom** (ordre alphabétique)
-* **Par date de dernière maintenance**
-* **Par gravité de la dernière alerte**
-
-✅ Exemple UX :
-
-* Lorsque l’utilisateur clique sur "Sort", une **bottom sheet** ou un **menu modal** s’ouvre avec ces options à cocher ou à glisser.
-
----
-
-## 🧪 **Bouton `Filter`** (Filtrer)
-
-Permet de filtrer uniquement les engrenages selon certaines conditions :
-
-### 🧰 Filtres proposés :
-
-* ✅ **État** : OK / Warning / Fault uniquement
-* ⚙️ **Code de défaut spécifique** : Ex : Code 04
-* 🕒 **RUL inférieur à X jours**
-* 📅 **Avec historique de panne**
-* 🧠 **Dernière prédiction IA : Critique / Faible / Moyenne**
-
-✅ Exemple UX :
-
-* Le bouton ouvre une **pop-up avec des cases à cocher** ou des **sliders**.
+    ```
+    lib/
+    ├── main.dart
+    ├── screens/
+    │   ├── gear_list_screen.dart       # Écran principal avec la liste des équipements
+    │   └── add_gear_screen.dart        # Écran de formulaire pour ajouter un équipement
+    ├── widgets/
+    │   └── gear_item.dart              # Widget réutilisable pour afficher un équipement
+    └── models/
+        └── gear.dart                   # (optionnel, tu peux y définir un modèle Gear si besoin)
+    ```
 
 ---
 
-## ➕ Interface `Add Gear`
+##  Explication des fichiers
 
-Voici ce que devrait contenir l'écran "Ajouter un engrenage" :
+### `main.dart`
 
----
+* Le **point d'entrée** de l'application.
+* Initialise `MyApp` et configure l’apparence globale (thème, police, page d’accueil).
+* Lance la page `GearListScreen`.
 
-### 📱 Interface : **"Add New Gear"**
-
-**Composants à afficher :**
-
-1. **Nom du Gear** (champ texte obligatoire)
-2. **Numéro de série** (champ alphanumérique)
-3. **Type** (menu déroulant : pompe, moteur, compresseur, etc.)
-4. **Localisation** (champ texte ou liste prédéfinie)
-5. **Capteurs associés** (choix multiple : vibration, température…)
-6. **Dernière maintenance** (sélecteur de date)
-7. **RUL estimé** (nombre de jours)
-8. **Code défaut initial** (optionnel)
-9. **Statut actuel** (OK, Warning, Fault)
-10. **Bouton "Ajouter"** (validation et retour au dashboard)
+![alt text](captures/photo2.png)
 
 ---
 
-Souhaites-tu que je te génère l’**image** de cette interface maintenant pour visualiser exactement ce que ça donne ?
+### `screens/gear_list_screen.dart`
 
-Très bonne question ! Voici une réponse détaillée pour les boutons "Sort" et "Filter" ainsi que l’interface "Add Gear" pour ton application de maintenance prédictive.
+* Écran **principal** affichant la **liste des équipements** sous forme de cartes.
+* Permet de **naviguer vers l’écran d’ajout** d’un nouveau gear avec un bouton.
+* Comporte aussi une `BottomNavigationBar` (barre de navigation en bas).
+* Utilise une liste de `GearItem` pour afficher chaque équipement.
+* Gère les **états visuels** : couleur, icône, texte, note (code d’erreur ou RUL).
+* Affiche une alerte (snackbar) après chaque ajout réussi.
 
-🔃 Bouton Sort (Trier)
-Permet de trier la liste des engrenages selon différents critères :
+---
 
-🔽 Options de tri proposées :
-Par état (OK → Warning → Fault)
+### `screens/add_gear_screen.dart`
 
-Par RUL (Remaining Useful Life croissant ou décroissant)
+* Formulaire pour **ajouter un nouveau gear**.
+* Champs :
 
-Par nom (ordre alphabétique)
+  * **Nom du gear**
+  * **Statut** (`OK`, `Warning`, `Fault`)
+  * **Code de panne** (optionnel)
+  * **RUL** (optionnel)
+* Lors de la soumission, crée un `GearItem` avec icône et couleur en fonction du statut.
+* Retourne l’objet à l’écran principal pour l’ajouter à la liste.
 
-Par date de dernière maintenance
+---
 
-Par gravité de la dernière alerte
+### `widgets/gear_item.dart`
 
-✅ Exemple UX :
+* Widget **réutilisable** représentant un équipement sous forme de carte.
+* Affiche :
 
-Lorsque l’utilisateur clique sur "Sort", une bottom sheet ou un menu modal s’ouvre avec ces options à cocher ou à glisser.
+  * Nom
+  * Icône selon le statut
+  * Statut stylisé
+  * Note (ex. `"Fault Code 04"` ou `"RUL 15d"`)
+* Le style et la couleur s’ajustent selon le statut (OK = vert, Warning = orange, Fault = rouge).
 
-🧪 Bouton Filter (Filtrer)
-Permet de filtrer uniquement les engrenages selon certaines conditions :
+---
 
-🧰 Filtres proposés :
-✅ État : OK / Warning / Fault uniquement
+### `models/gear.dart` (optionnel)
 
-⚙️ Code de défaut spécifique : Ex : Code 04
+Tu peux y créer une classe `Gear` pour représenter un équipement de façon plus propre si tu veux séparer **logique métier** et **interface graphique**. 
 
-🕒 RUL inférieur à X jours
+![alt text](captures/photo3.png)
 
-📅 Avec historique de panne
+---
 
-🧠 Dernière prédiction IA : Critique / Faible / Moyenne
+##  Comment fonctionne l'application ?
 
-✅ Exemple UX :
+1. **Au démarrage**, `main.dart` affiche `GearListScreen`.
+2. `GearListScreen` affiche la liste actuelle de `GearItem`.
 
-Le bouton ouvre une pop-up avec des cases à cocher ou des sliders.
+![alt text](captures/photo4.png)
 
-➕ Interface Add Gear
-Voici ce que devrait contenir l'écran "Ajouter un engrenage" :
+3. Lorsque l’utilisateur appuie sur "Add Gear", un formulaire s’ouvre (`AddGearScreen`).
 
-📱 Interface : "Add New Gear"
-Composants à afficher :
+![alt text](captures/photo5.png)
 
-Nom du Gear (champ texte obligatoire)
+![alt text](captures/photo6.png)
 
-Numéro de série (champ alphanumérique)
+![alt text](captures/photo7.png) 
 
-Type (menu déroulant : pompe, moteur, compresseur, etc.)
+4. Une fois le formulaire soumis :
 
-Localisation (champ texte ou liste prédéfinie)
+   * Le nouveau `GearItem` est créé avec statut, icône et note.
+   * Il est renvoyé à la page précédente et ajouté à la liste.
+   * Un message de succès s’affiche.
 
-Capteurs associés (choix multiple : vibration, température…)
+![alt text](captures/photo8.png)
 
-Dernière maintenance (sélecteur de date)
+---
 
-RUL estimé (nombre de jours)
+##  Pourquoi utiliser Flutter ici ?
 
-Code défaut initial (optionnel)
+| Avantage                     | Description                                                                             |
+| ---------------------------- | --------------------------------------------------------------------------------------- |
+|  Rapidité de développement | Flutter permet de créer des interfaces fluides très rapidement grâce au **hot reload**. |
+|  Interface élégante        | Les widgets personnalisables permettent un rendu moderne avec peu de code.              |
+|  Multiplateforme           | Une seule base de code pour Android, iOS et même Web.                                   |
+|  Composants réutilisables  | Widgets comme `GearItem` permettent une architecture propre et modulaire.               |
 
-Statut actuel (OK, Warning, Fault)
+---
 
-Bouton "Ajouter" (validation et retour au dashboard)
+##  Aperçu de l’UI (schéma)
 
-Souhaites-tu que je te génère l’image de cette interface maintenant pour visualiser exactement ce que ça donne ?
+```
++--------------------------------------------------+
+|              AppBar - List of Gears              |
++--------------------------------------------------+
+|  Gear 1        [OK]         All Good           |
+|  Gear 2     [Warning]    Fault Code 04         |
+|  Gear 3       [Fault]        Critical          |
+|  Gear 4                      RUL 15d           |
+|  Gear 5                      Pu6L1             |
++--------------------------------------------------+
+|         [ + Add Gear ] (bouton formulaire)       |
++--------------------------------------------------+
+| Overview | Gears | Alerts | Predictions          |
++--------------------------------------------------+
+```
 
-// 🎯 Étapes :
-// 1. Créer un projet Flutter
-// 2. Définir les interfaces : ListGearsScreen et AddGearScreen
-// 3. Naviguer de la liste vers le formulaire d'ajout
-// 4. Afficher dynamiquement les Gears dans une liste
+---
 
+##  Améliorations futures possibles
 
-Structure du projet
-main.dart : Ce fichier contient votre point d'entrée, et vous n'avez plus qu'à initialiser GearListScreen() comme dans le code que vous avez donné.
+*  Ajouter une fonctionnalité de **filtrage par statut**.
+*  Sauvegarder les données localement avec SQLite ou Hive.
+*  Connecter à une API pour récupérer des équipements en temps réel.
+*  Afficher des graphiques prédictifs selon les statuts (Analytics).
 
-gear_list_screen.dart : Ce fichier gère la liste des gears et leur ajout via un bouton.
+---
 
-add_gear_screen.dart : Ce fichier gère l'écran où l'utilisateur peut ajouter un gear.
+Auteur : SARA EL AMRANI
 
-gear_item.dart : Ce fichier contient le widget GearItem qui représente un gear sous forme de carte.

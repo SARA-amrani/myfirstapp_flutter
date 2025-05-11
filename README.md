@@ -124,10 +124,10 @@ Tu peux y créer une classe `Gear` pour représenter un équipement de façon pl
 
 | Avantage                     | Description                                                                             |
 | ---------------------------- | --------------------------------------------------------------------------------------- |
-|  Rapidité de développement | Flutter permet de créer des interfaces fluides très rapidement grâce au **hot reload**. |
-|  Interface élégante        | Les widgets personnalisables permettent un rendu moderne avec peu de code.              |
-|  Multiplateforme           | Une seule base de code pour Android, iOS et même Web.                                   |
-|  Composants réutilisables  | Widgets comme `GearItem` permettent une architecture propre et modulaire.               |
+|  Rapidité de développement | Flutter permet de créer des interfaces fluides très rapidement grâce au **hot reload**.   |
+|  Interface élégante        | Les widgets personnalisables permettent un rendu moderne avec peu de code.                |
+|  Multiplateforme           | Une seule base de code pour Android, iOS et même Web.                                     |
+|  Composants réutilisables  | Widgets comme `GearItem` permettent une architecture propre et modulaire.                 |
 
 ---
 

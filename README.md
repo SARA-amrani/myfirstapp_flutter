@@ -1,9 +1,11 @@
 # Gear Status App - Flutter
 Cette application Flutter permet de **gérer une liste d’équipements (Gears)**, chacun ayant un statut (OK, Warning, Fault), un code d’erreur ou une estimation de durée de vie (RUL - Remaining Useful Life). Elle offre une interface intuitive pour **afficher, ajouter et visualiser des équipements**.
+
 ---
 
 ## Plateforme de Maintenance 4.0 
 Ce projet présente une plateforme intelligente de maintenance prédictive conçue pour optimiser la gestion des équipements industriels en s'appuyant sur les technologies IoT, Intelligence Artificielle, et visualisation de données. Grâce à une architecture en 4 niveaux (collecte, stockage, analyse, visualisation), elle permet la détection précoce des défaillances, la réduction des coûts de maintenance et l'amélioration de la disponibilité des machines.
+
 ---
 
 ##  Fonctionnalités principales
